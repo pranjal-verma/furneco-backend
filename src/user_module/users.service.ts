@@ -12,7 +12,7 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async get(id: number): Promise<User> {
+  async getByID(id: number): Promise<User> {
     return this.userRepository.findOne({
       where: {
         id: id,
@@ -20,13 +20,20 @@ export class UsersService {
     });
   }
 
-  async create(user: CreateUserDto): Promise<User> {
-    const { name, email } = user;
+  // TODO: add interface for UserFilter and build query
+  async getOne(filter: any): Promise<User> {
+    console.log(filter);
+    return this.userRepository.findOneBy({
+      ...filter,
+    });
+  }
 
+  async create(user: CreateUserDto): Promise<User> {
     // Create a new instance of the User entity and assign properties
     const newUserEntity = new User();
-    newUserEntity.name = name;
-    newUserEntity.email = email;
+    newUserEntity.name = user.name;
+    newUserEntity.email = user.email;
+    newUserEntity.password = user.password;
     return this.userRepository.save(newUserEntity);
   }
 }
