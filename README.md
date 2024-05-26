@@ -3,10 +3,24 @@
 Backend for furneco ecommerce application written in
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Prerequisites
+
+1. [make](https://opensource.com/article/18/8/what-how-makefile): You need make installed to run migrations.
+
 ## Installation
 
 ```bash
 $ npm install
+```
+
+## Database Migrations
+
+```bash
+# Run all migrations
+$ make migrate-up
+
+# Generate a migration from entities
+$ make migrate-generate
 ```
 
 ## Running the app
